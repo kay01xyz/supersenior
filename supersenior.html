@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Brain Gym - Training Portal</title>
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --header-color: #2c3e50;
+            --level1-color: #27ae60;
+            --level3-color: #2980b9;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: var(--header-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; }
+        p.subtitle { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            border-bottom: 4px solid;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .l1-title { border-color: var(--level1-color); color: var(--level1-color); }
+        .l3-title { border-color: var(--level3-color); color: var(--level3-color); }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 2px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: #ddd;
+        }
+
+        .game-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.6rem;
+            color: #2c3e50;
+        }
+
+        .game-card p {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .skills-tag {
+            display: inline-block;
+            background: #eee;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .play-btn {
+            background-color: var(--header-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Fullscreen Game Overlay */
+        #game-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 1000;
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Senior Brain Gym</h1>
+        <p class="subtitle">Select a game below to start your cognitive exercise.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- LEVEL 1 SECTION (Based on IMG_3157.jpg) -->
+        <h2 class="section-title l1-title">Level 1: Beginner Games</h2>
+        <div class="game-grid">
+            <a href="#" class="game-card" onclick="openGame('https://www.abcya.com/games/connect_the_dots')">
+                <div>
+                    <h3>Dot to Dot</h3>
+                    <p>Connect the numbers to reveal a picture. Great for hand-eye coordination.</p>
+                    <span class="skills-tag">Visual Perception • Attention</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+
+            <a href="#" class="game-card" onclick="openGame('https://www.digipuzzle.net/minigames/findthesame/find_the_same.htm')">
+                <div>
+                    <h3>Find the Same</h3>
+                    <p>Identify matching pairs and improve your focus.</p>
+                    <span class="skills-tag">Attention • Visual Perception</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+
+            <a href="#" class="game-card" onclick="openGame('https://www.mathplayground.com/grade_1_games.html')">
+                <div>
+                    <h3>123 Genius</h3>
+                    <p>Simple counting and number recognition puzzles.</p>
+                    <span class="skills-tag">Math Skills • Visual Perception</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+        </div>
+
+        <!-- LEVEL 3 SECTION (Based on IMG_3154.jpg, IMG_3155.jpg, IMG_3156.jpg) -->
+        <h2 class="section-title l3-title">Level 3: Advanced Training</h2>
+        <div class="game-grid">
+            <a href="#" class="game-card" onclick="openGame('https://puzzles.arkadium.com/unblock-it/')">
+                <div>
+                    <h3>Unblock Me</h3>
+                    <p>Slide the blocks to clear a path for the red square.</p>
+                    <span class="skills-tag">Logic • Executive Function</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+
+            <a href="#" class="game-card" onclick="openGame('https://www.helpfulgames.com/types-of-games/memory/memory-match.html')">
+                <div>
+                    <h3>Memory Star</h3>
+                    <p>Exercise your short-term memory by matching hidden cards.</p>
+                    <span class="skills-tag">Memory • Attention</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+
+            <a href="#" class="game-card" onclick="openGame('https://mazesandmore.com/')">
+                <div>
+                    <h3>Mazes & More</h3>
+                    <p>Navigate through complex paths to find the exit.</p>
+                    <span class="skills-tag">Logic • Visual Perception</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+
+            <a href="#" class="game-card" onclick="openGame('https://schultetable.com/')">
+                <div>
+                    <h3>Amazing Table</h3>
+                    <p>Find numbers in order as fast as you can to improve reaction time.</p>
+                    <span class="skills-tag">Attention • Reaction Speed</span>
+                </div>
+                <div class="play-btn">Play Now</div>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Fullscreen Iframe Modal -->
+    <div id="game-overlay">
+        <button id="close-btn" onclick="closeGame()">Exit Game</button>
+        <iframe id="game-frame" src=""></iframe>
+    </div>
+
+    <footer>
+        Game categories and levels curated based on Occupational Therapy guidelines.<br>
+        Reference: IMG_3154.jpg, IMG_3155.jpg, IMG_3156.jpg, IMG_3157.jpg.
+    </footer>
+
+    <script>
+        function openGame(url) {
+            document.getElementById('game-frame').src = url;
+            document.getElementById('game-overlay').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeGame() {
+            document.getElementById('game-overlay').style.display = 'none';
+            document.getElementById('game-frame').src = '';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+    </script>
+
+</body>
+</html>
