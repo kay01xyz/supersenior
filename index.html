@@ -1,258 +1,626 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-Hant-HK">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senior Brain Gym - Training Portal</title>
-    <style>
-        :root {
-            --bg-color: #fdfdfd;
-            --header-color: #2c3e50;
-            --level1-color: #27ae60;
-            --level3-color: #2980b9;
-            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>家居認知訓練 Browser 版 App 對照表</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18202b;
+      --muted: #5d6878;
+      --line: #d9e0ea;
+      --paper: #f8fafc;
+      --panel: #ffffff;
+      --accent: #087f8c;
+      --accent-2: #b54708;
+      --focus: #2454c6;
+      --good: #186a3b;
+      --shadow: 0 10px 30px rgba(24, 32, 43, 0.08);
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+    * { box-sizing: border-box; }
 
-        header {
-            background-color: var(--header-color);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans HK", "Microsoft JhengHei", Arial, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+    }
 
-        h1 { margin: 0; font-size: 2.5rem; }
-        p.subtitle { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
 
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-        .section-title {
-            font-size: 2rem;
-            border-bottom: 4px solid;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            text-align: left;
-        }
+    .top {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 28px;
+      padding: 28px 0 22px;
+      align-items: end;
+    }
 
-        .l1-title { border-color: var(--level1-color); color: var(--level1-color); }
-        .l3-title { border-color: var(--level3-color); color: var(--level3-color); }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
 
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 760px;
+    }
 
-        .game-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 2px solid transparent;
-        }
+    .meta {
+      justify-self: end;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            border-color: #ddd;
-        }
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 14px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
 
-        .game-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.6rem;
-            color: #2c3e50;
-        }
+    label {
+      display: block;
+      font-weight: 650;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
 
-        .game-card p {
-            font-size: 1.1rem;
-            line-height: 1.4;
-            color: #666;
-            margin-bottom: 20px;
-        }
+    input, select {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #bcc8d8;
+      border-radius: 8px;
+      padding: 9px 12px;
+      background: #ffffff;
+      color: var(--ink);
+      font: inherit;
+    }
 
-        .skills-tag {
-            display: inline-block;
-            background: #eee;
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: #555;
-        }
+    main { padding: 24px 0 38px; }
 
-        .play-btn {
-            background-color: var(--header-color);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
 
-        /* Fullscreen Game Overlay */
-        #game-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
-            z-index: 1000;
-        }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
 
-        #close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1001;
-        }
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.2;
+    }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+    .stat span { color: var(--muted); font-size: 14px; }
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-            font-size: 0.9rem;
-        }
-    </style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .level {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e7f4f5;
+      color: #07545e;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .level.advanced {
+      background: #fff1df;
+      color: #7a3f00;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .original {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      border: 1px solid #c8d3df;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #334155;
+      font-size: 13px;
+      background: #ffffff;
+    }
+
+    .note {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      color: #ffffff;
+      background: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    a.button.secondary {
+      background: #ffffff;
+      color: var(--accent);
+    }
+
+    a.button:focus, input:focus, select:focus {
+      outline: 3px solid rgba(36, 84, 198, 0.25);
+      outline-offset: 2px;
+    }
+
+    .remark {
+      margin-top: 22px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent-2);
+      background: #fff8ef;
+      color: #55320d;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 900px) {
+      .top, .controls { grid-template-columns: 1fr; }
+      .meta { justify-self: stretch; }
+      .summary { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 20px, 1180px); }
+      .summary, .grid { grid-template-columns: 1fr; }
+      .links { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-
-    <header>
-        <h1>Senior Brain Gym</h1>
-        <p class="subtitle">Select a game below to start your cognitive exercise.</p>
-    </header>
-
-    <div class="container">
-        
-        <!-- LEVEL 1 SECTION (Based on IMG_3157.jpg) -->
-        <h2 class="section-title l1-title">Level 1: Beginner Games</h2>
-        <div class="game-grid">
-            <a href="#" class="game-card" onclick="openGame('https://www.abcya.com/games/connect_the_dots')">
-                <div>
-                    <h3>Dot to Dot</h3>
-                    <p>Connect the numbers to reveal a picture. Great for hand-eye coordination.</p>
-                    <span class="skills-tag">Visual Perception • Attention</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
-
-            <a href="#" class="game-card" onclick="openGame('https://www.digipuzzle.net/minigames/findthesame/find_the_same.htm')">
-                <div>
-                    <h3>Find the Same</h3>
-                    <p>Identify matching pairs and improve your focus.</p>
-                    <span class="skills-tag">Attention • Visual Perception</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
-
-            <a href="#" class="game-card" onclick="openGame('https://www.mathplayground.com/grade_1_games.html')">
-                <div>
-                    <h3>123 Genius</h3>
-                    <p>Simple counting and number recognition puzzles.</p>
-                    <span class="skills-tag">Math Skills • Visual Perception</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1>家居認知訓練 Browser 版 App 對照表</h1>
+          <p class="lead">根據 PDF 內的平板電腦遊戲整理，改為可用電腦瀏覽器開啟的訓練活動。每張卡都保留原 app 對照，並提供可直接玩的網頁版連結。</p>
         </div>
-
-        <!-- LEVEL 3 SECTION (Based on IMG_3154.jpg, IMG_3155.jpg, IMG_3156.jpg) -->
-        <h2 class="section-title l3-title">Level 3: Advanced Training</h2>
-        <div class="game-grid">
-            <a href="#" class="game-card" onclick="openGame('https://puzzles.arkadium.com/unblock-it/')">
-                <div>
-                    <h3>Unblock Me</h3>
-                    <p>Slide the blocks to clear a path for the red square.</p>
-                    <span class="skills-tag">Logic • Executive Function</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
-
-            <a href="#" class="game-card" onclick="openGame('https://www.helpfulgames.com/types-of-games/memory/memory-match.html')">
-                <div>
-                    <h3>Memory Star</h3>
-                    <p>Exercise your short-term memory by matching hidden cards.</p>
-                    <span class="skills-tag">Memory • Attention</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
-
-            <a href="#" class="game-card" onclick="openGame('https://mazesandmore.com/')">
-                <div>
-                    <h3>Mazes & More</h3>
-                    <p>Navigate through complex paths to find the exit.</p>
-                    <span class="skills-tag">Logic • Visual Perception</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
-
-            <a href="#" class="game-card" onclick="openGame('https://schultetable.com/')">
-                <div>
-                    <h3>Amazing Table</h3>
-                    <p>Find numbers in order as fast as you can to improve reaction time.</p>
-                    <span class="skills-tag">Attention • Reaction Speed</span>
-                </div>
-                <div class="play-btn">Play Now</div>
-            </a>
+        <div class="meta">
+          來源文件：App for training.pdf<br>
+          整理日期：2026-05-15<br>
+          適用：Chrome、Edge、Safari、Firefox
         </div>
-
+      </div>
+      <div class="controls">
+        <div>
+          <label for="search">搜尋 app / 能力 / 網站</label>
+          <input id="search" type="search" placeholder="例如：專注力、Flow、迷宮、記憶力">
+        </div>
+        <div>
+          <label for="skill">按訓練能力篩選</label>
+          <select id="skill">
+            <option value="">全部能力</option>
+            <option>專注力</option>
+            <option>視覺感知</option>
+            <option>手眼協調</option>
+            <option>語言能力</option>
+            <option>運算力</option>
+            <option>記憶力</option>
+            <option>反應速度</option>
+            <option>邏輯思維</option>
+            <option>執行能力</option>
+            <option>判斷力</option>
+          </select>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <!-- Fullscreen Iframe Modal -->
-    <div id="game-overlay">
-        <button id="close-btn" onclick="closeGame()">Exit Game</button>
-        <iframe id="game-frame" src=""></iframe>
+  <main>
+    <div class="wrap">
+      <section class="summary" aria-label="摘要">
+        <div class="stat"><strong id="shownCount">17</strong><span>個 browser 活動</span></div>
+        <div class="stat"><strong>2</strong><span>個難度級別</span></div>
+        <div class="stat"><strong>10</strong><span>類訓練能力</span></div>
+        <div class="stat"><strong>0</strong><span>需要安裝 app</span></div>
+      </section>
+
+      <section class="grid" id="cards" aria-label="App 對照卡">
+        <article class="card" data-level="初級" data-skills="專注力 視覺感知 手眼協調" data-search="dot to dot low vision connect dots belmikri">
+          <div class="card-head">
+            <span class="level">初級</span>
+            <h2>Connect the Dots</h2>
+            <div class="original">對照原 app：Dot to Dot Low Vision</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">視覺感知</span><span class="tag">手眼協調</span></div>
+            <p class="note">用滑鼠順序連點，適合練視覺追蹤、點選準確度同持續注意。</p>
+            <div class="links">
+              <a class="button" href="https://www.belmikri.com/" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/dot-to-dot-low-vision/id691053108" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="初級" data-skills="專注力 視覺感知" data-search="preschool puzzle jigsaw toddler turtle puzzle">
+          <div class="card-head">
+            <span class="level">初級</span>
+            <h2>幼兒砌圖</h2>
+            <div class="original">對照原 app：Free Baby Preschool Puzzle</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">視覺感知</span></div>
+            <p class="note">拖放少量拼圖塊，介面簡單，適合入門視覺組織訓練。</p>
+            <div class="links">
+              <a class="button" href="https://www.toddlergamesonline.com/04-puzzles/01-turtle.php" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/a-free-baby-preschool-puzzle-for-kids-and-toddlers/id1190292189" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="初級" data-skills="專注力 視覺感知" data-search="animal maze maze kids">
+          <div class="card-head">
+            <span class="level">初級</span>
+            <h2>Animal Maze</h2>
+            <div class="original">對照原 app：Animal Maze Kids Game</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">視覺感知</span></div>
+            <p class="note">迷宮路線搜尋，適合練空間方向、計劃路線同持續注意。</p>
+            <div class="links">
+              <a class="button" href="https://8games.net/maze-games/animal-maze.html" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/animal-maze-kids-game/id760295069" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="初級" data-skills="語言能力" data-search="語你同行 language cantonese communication">
+          <div class="card-head">
+            <span class="level">初級</span>
+            <h2>語言溝通活動</h2>
+            <div class="original">對照原 app：語你同行</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">語言能力</span></div>
+            <p class="note">網頁版以語言理解、分類及描述練習代替；可配合治療師口頭提示使用。</p>
+            <div class="links">
+              <a class="button" href="https://wordwall.net/en-us/community/speech-therapy" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/hk/app/%E8%AA%9E%E4%BD%A0%E5%90%8C%E8%A1%8C/id580776079" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="初級" data-skills="視覺感知" data-search="find the same memory match matching">
+          <div class="card-head">
+            <span class="level">初級</span>
+            <h2>Memory Match</h2>
+            <div class="original">對照原 app：Find the Same Lite</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">視覺感知</span><span class="tag">記憶力</span></div>
+            <p class="note">翻牌找相同圖案，難度可由少牌開始，適合視覺配對同短期記憶。</p>
+            <div class="links">
+              <a class="button" href="https://www.belmikri.com/" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/find-the-same-lite/id521635756" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="初級" data-skills="運算力 視覺感知" data-search="123 genius numbers counting game math">
+          <div class="card-head">
+            <span class="level">初級</span>
+            <h2>Numbers & Counting</h2>
+            <div class="original">對照原 app：123 Genius First Numbers</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">運算力</span><span class="tag">視覺感知</span></div>
+            <p class="note">數字、數量及配對活動，適合由辨認數字逐步過渡到簡單運算。</p>
+            <div class="links">
+              <a class="button" href="https://www.topmarks.co.uk/learning-to-count/ladybird-spots" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/123-genius-first-numbers-counting-game-for-kids/id717296618" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 視覺感知 邏輯思維" data-search="matrix game puzzle grid">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Matrix / Pattern Puzzle</h2>
+            <div class="original">對照原 app：Matrix Game 3</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">視覺感知</span><span class="tag">邏輯思維</span></div>
+            <p class="note">圖形規律同配對判斷，適合做較高階視覺推理練習。</p>
+            <div class="links">
+              <a class="button" href="https://playcutegames.com/game/pattern-match-adventure" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/matrix-game-3/id468021471" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 執行能力 邏輯思維" data-search="puzzle glow number link flow fill line">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Number Link / Flow Puzzle</h2>
+            <div class="original">對照原 app：Puzzle Glow-All in One</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">執行能力</span><span class="tag">邏輯思維</span></div>
+            <p class="note">連接同色點並填滿格仔，適合練計劃、試錯同抑制衝動。</p>
+            <div class="links">
+              <a class="button" href="https://puzzio.io/game/connect-the-dots---relaxing-puzzle" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/puzzle-glow-all-in-one/id1411182056" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="記憶力 專注力 反應速度 邏輯思維 運算力 執行能力 視覺感知 判斷力" data-search="lumosity brain training">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Lumosity</h2>
+            <div class="original">對照原 app：Lumosity: Brain Training</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">記憶力</span><span class="tag">專注力</span><span class="tag">反應速度</span><span class="tag">邏輯思維</span></div>
+            <p class="note">官方網站支援瀏覽器訓練，需登入；免費帳戶一般有每日限制。</p>
+            <div class="links">
+              <a class="button" href="https://www.lumosity.com/en/brain-training/" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/hk/app/lumosity-brain-training/id577232024" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 視覺感知" data-search="hidden pictures puzzle play seek find">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Hidden Pictures</h2>
+            <div class="original">對照原 app：Hidden Pictures Puzzle Play</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">視覺感知</span></div>
+            <p class="note">在圖中尋找指定物件，適合訓練視覺掃描同細節辨認。</p>
+            <div class="links">
+              <a class="button" href="https://pictureseeker.com/" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/hidden-pictures-puzzle-play/id1462177299" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 執行能力 邏輯思維 判斷力 反應速度" data-search="peak brain training">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Peak 類腦力訓練</h2>
+            <div class="original">對照原 app：Peak Brain Training</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">執行能力</span><span class="tag">判斷力</span><span class="tag">反應速度</span></div>
+            <p class="note">Peak 主要係手機 app；電腦可改用同類型 browser 腦力訓練合集。</p>
+            <div class="links">
+              <a class="button" href="https://www.brainzilla.com/" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/peak-brain-training/id806223188" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 反應速度 記憶力" data-search="amazing table attention memory test">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Attention Table</h2>
+            <div class="original">對照原 app：Amazing Table - train brain</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">反應速度</span><span class="tag">記憶力</span></div>
+            <p class="note">Schulte Table 類活動，按次序尋找數字，適合練視覺搜尋速度。</p>
+            <div class="links">
+              <a class="button" href="https://schulte-table.com/" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/hk/app/amazing-table-attention-and-memory-test/id991608133" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="邏輯思維 語言能力" data-search="sequence of events sequencing cards story order">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Sequencing Events</h2>
+            <div class="original">對照原 app：Sequence of Events</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">邏輯思維</span><span class="tag">語言能力</span></div>
+            <p class="note">用故事排序、先後次序同因果描述，支援語言表達及邏輯組織。</p>
+            <div class="links">
+              <a class="button" href="https://wordwall.net/en-us/community/sequence-written-events" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/sequence-of-events-sequencing-cards-for-kids/id925215188" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 執行能力 邏輯思維" data-search="flow free unblock me">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Flow Free / Unblock Me</h2>
+            <div class="original">對照原 app：Flow Free、Unblock Me</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">執行能力</span><span class="tag">邏輯思維</span></div>
+            <p class="note">路線規劃同 2D 滑動木塊，適合練問題解決、步驟計劃同彈性思考。</p>
+            <div class="links">
+              <a class="button" href="https://poki.com/zh/g/free-the-key" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/unblock-me/id315019111" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 執行能力 邏輯思維" data-search="buttons scissors puzzle">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Buttons and Scissors</h2>
+            <div class="original">對照原 app：Buttons and Scissors</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">執行能力</span><span class="tag">邏輯思維</span></div>
+            <p class="note">按規則移除同色鈕扣，訓練先後次序、規則保持同視覺掃描。</p>
+            <div class="links">
+              <a class="button" href="https://www.cargames.com/Buttons-And-Scissors" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/us/app/buttons-and-scissors/id664686958" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="專注力 反應速度" data-search="colour drop color drop reaction">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Colour Drop</h2>
+            <div class="original">對照原 app：Colour Drop</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">專注力</span><span class="tag">反應速度</span></div>
+            <p class="note">顏色判斷及快速反應，可作短時段暖身訓練。</p>
+            <div class="links">
+              <a class="button" href="https://naptechgames.com/game/color-drop" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/tw/app/colour-drop/id1270457611" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-level="高級" data-skills="運算力 視覺感知 邏輯思維" data-search="make7 hexa puzzle number merge">
+          <div class="card-head">
+            <span class="level advanced">高級</span>
+            <h2>Make7! Hexa Puzzle</h2>
+            <div class="original">對照原 app：Make7! Hexa Puzzle</div>
+          </div>
+          <div class="body">
+            <div class="skills"><span class="tag">運算力</span><span class="tag">視覺感知</span><span class="tag">邏輯思維</span></div>
+            <p class="note">數字合併同空間擺放，適合練數量概念、預測同策略。</p>
+            <div class="links">
+              <a class="button" href="https://kbhgames.com/game/make7-hexa-puzzle" target="_blank" rel="noopener">開啟網頁版</a>
+              <a class="button secondary" href="https://apps.apple.com/hk/app/make7-hexa-puzzle/id1095364364" target="_blank" rel="noopener">原 app 參考</a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <p class="remark">備註：第三方遊戲網站可能會有廣告或彈窗。正式用於治療或課堂前，建議先由職員在同一部電腦試開一次，確認網絡、聲音、廣告及難度都合適。</p>
     </div>
+  </main>
 
-    <footer>
-        Game categories and levels curated based on Occupational Therapy guidelines.<br>
-        Reference: IMG_3154.jpg, IMG_3155.jpg, IMG_3156.jpg, IMG_3157.jpg.
-    </footer>
+  <script>
+    const search = document.querySelector("#search");
+    const skill = document.querySelector("#skill");
+    const cards = Array.from(document.querySelectorAll(".card"));
+    const shownCount = document.querySelector("#shownCount");
 
-    <script>
-        function openGame(url) {
-            document.getElementById('game-frame').src = url;
-            document.getElementById('game-overlay').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        }
+    function normalise(value) {
+      return value.trim().toLowerCase();
+    }
 
-        function closeGame() {
-            document.getElementById('game-overlay').style.display = 'none';
-            document.getElementById('game-frame').src = '';
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
-        }
-    </script>
+    function applyFilters() {
+      const query = normalise(search.value);
+      const selectedSkill = skill.value;
+      let shown = 0;
 
+      for (const card of cards) {
+        const haystack = normalise([
+          card.textContent,
+          card.dataset.search,
+          card.dataset.skills,
+          card.dataset.level
+        ].join(" "));
+        const hasQuery = !query || haystack.includes(query);
+        const hasSkill = !selectedSkill || card.dataset.skills.includes(selectedSkill);
+        const visible = hasQuery && hasSkill;
+        card.classList.toggle("hidden", !visible);
+        if (visible) shown += 1;
+      }
+
+      shownCount.textContent = String(shown);
+    }
+
+    search.addEventListener("input", applyFilters);
+    skill.addEventListener("change", applyFilters);
+  </script>
 </body>
 </html>
